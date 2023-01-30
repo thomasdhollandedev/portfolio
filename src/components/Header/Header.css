@@ -1,0 +1,418 @@
+:root {
+    --ring: #e6e8db;
+    --blend-from: 0%;
+    --blend-to: 100%;
+    --blend-dir: top right;
+}
+
+[icon] {
+    flex: none;
+    display: none;
+    position: relative;
+    font-size: calc(10em + 1vmin);
+    width: 40px;
+    height: 40px;
+    /* margin: .3em; */
+    border-radius: 100%;
+    box-shadow: 0 0 0 -10px var(--ring) inset, 0 0 10px 0 var(--shadow);
+    background: linear-gradient(to var(--blend-dir), var(--blend1) var(--blend-from), var(--blend2) var(--blend-to));
+    /*   filter: saturate(0); */
+    cursor: pointer;
+}
+
+/* [icon]:hover {
+    filter: saturate(1);
+  } */
+
+[icon='sunny'] {
+    --shadow: #fd6f21;
+    --blend1: #fc5830;
+    --blend2: #f98c24;
+    --blend-to: 65%;
+}
+
+[icon='supermoon'] {
+    --shadow: #5133a5;
+    --blend1: #4054b2;
+    --blend2: #aa4cba;
+    --blend-to: 65%;
+    --blend-dir: bottom right;
+}
+
+/* SUNNY */
+/* --------------------- */
+.sun {
+    position: absolute;
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+    background: #ffeb3b;
+    transform-origin: .1em .1em;
+}
+
+.sun::after {
+    content: '';
+    position: absolute;
+    top: .1em;
+    left: 0;
+    will-change: transform;
+    transform: translate(-50%, -50%);
+    width: .1em;
+    height: .1em;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, .1);
+    animation: flare 12000ms infinite alternate linear;
+}
+
+[icon="sunny"] {
+    display: block;
+}
+
+/* SUPERMOON */
+/* --------------------- */
+[icon="supermoon"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 50% 20%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 30% 65%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 15% 05%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 37% 35%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 65% 47%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 42% 29%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 73% 56%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 24% 19%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 31% 47%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 18% 39%, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    will-change: transform;
+    animation: revolve 120000ms linear infinite;
+}
+
+.moon {
+    position: absolute;
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+    background: radial-gradient(circle at bottom left, var(--ring), #fef07e);
+}
+
+.moon::before,
+.moon::after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    background-color: var(--blend1);
+    box-shadow: .01em .01em .1em 0 var(--blend1);
+}
+
+.moon::before {
+    top: 15%;
+    left: 55%;
+    width: 20%;
+    height: 20%;
+    opacity: .3;
+}
+
+.moon::after {
+    bottom: 50%;
+    left: 25%;
+    width: 15%;
+    height: 15%;
+    opacity: .2;
+}
+
+.meteor {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0;
+    top: 20%;
+    left: 55%;
+    width: 1px;
+    height: 15px;
+    transform: rotate(45deg);
+    will-change: transform, opacity;
+    animation: meteor 6250ms infinite ease-in;
+}
+
+[icon="supermoon"] {
+    display: block;
+}
+
+@keyframes flare {
+    to {
+        transform: translate(-10px, 50%);
+        opacity: .4;
+        font-size: 2px;
+    }
+}
+
+@keyframes revolve {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes meteor {
+    5% {
+        opacity: 1;
+    }
+
+    8% {
+        transform: translate(-.6em, .6em) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 82px; */
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
+    background-color: var(--bg-color-1);
+    z-index: 999;
+    transition: all .5s ease;
+}
+
+header.active {
+    background-color: transparent;
+}
+
+header .left,
+header .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 2;
+}
+
+header .left {
+    position: relative;
+}
+
+header .left img {
+    height: 70px;
+    width: auto;
+}
+
+header .left a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    font-size: 0px;
+}
+
+.btn_burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn_burger span {
+    width: 100%;
+    height: 6px;
+    border: 2px solid var(--button-bg-color);
+    transition: all .3s ease;
+}
+
+.btn_burger:hover span {
+    background-color: var(--button-bg-color);
+}
+
+.btn_burger.active span:nth-child(1) {
+    background-color: var(--button-bg-color);
+}
+
+.btn_burger.active span:nth-child(2) {
+    background-color: var(--button-bg-color);
+}
+
+@keyframes line1 {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+
+    100% {
+        transform: translateY(6px) rotate(-45deg);
+    }
+}
+
+@keyframes line1_reverse {
+    0% {
+        transform: translateY(6px) rotate(-45deg);
+    }
+
+    50% {
+        transform: translateY(6px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@keyframes line2 {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(-6px) rotate(45deg);
+    }
+}
+
+@keyframes line2_reverse {
+    0% {
+        transform: translateY(-6px) rotate(45deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow: auto;
+    /* background: linear-gradient(0, var(--bg-color-1), var(--bg-color-1)), url('./../../../public/illustrations/oooscillate.svg'); */
+    background: url('./../../../public/illustrations/ssscribble.svg'), linear-gradient(0deg, var(--bg-color-1), var(--bg-color-1));
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-position: -75% 50%; */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding-top: 82px;
+    padding-bottom: 82px;
+    z-index: 998;
+}
+
+.overlay ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.overlay ul li {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.overlay ul li a {
+    position: relative;
+    font-size: 4rem;
+    font-family: font-paragraph-bold;
+    color: var(--link-color);
+    text-transform: uppercase;
+    -webkit-text-stroke: 2px var(--menu-link-stroke-color);
+    -webkit-text-fill-color: var(--menu-link-color);
+}
+
+@media (max-width: 767px) {
+    .overlay ul li a {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay ul li a {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 319px) {
+    .overlay ul li a {
+        font-size: 2rem;
+    }
+}
+
+.overlay ul li a:hover {
+    -webkit-text-fill-color: var(--menu-link-hover-color);
+}
+
+.overlay ul li a::before {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    content: '';
+    width: 0;
+    height: 4px;
+    background-color: var(--link-color);
+    transition: width .3s ease;
+}
+
+.overlay ul li a:hover::before {
+    width: 100%;
+    border: 2px solid var(--menu-link-stroke-color);
+}
+
+@keyframes open_overlay {
+    0% {
+        top: -100%;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes close_overlay {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -100%;
+    }
+}
