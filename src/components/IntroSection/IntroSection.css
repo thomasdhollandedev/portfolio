@@ -36,10 +36,13 @@
     flex: 1;
 }
 
+.illustration {
+    display: flex;
+    justify-content: center;
+}
+
 @media (max-width: 1280px) {
     .illustration {
-        display: flex;
-        justify-content: center;
         text-align: center;
     }
 }
