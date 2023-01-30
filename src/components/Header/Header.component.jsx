@@ -93,7 +93,7 @@ const HeaderComponent = ({ switchTheme, theme }) => {
                             {
                                 datas.mainMenuLinks.data.map(page => (
                                     <li key={page.id}>
-                                        <a href={`${process.env.REACT_APP_URL}${page.page_absolute_path}`}>{page.page_display_title}</a>
+                                        <a href={`${process.env.PUBLIC_URL}${page.page_absolute_path}`}>{page.page_display_title}</a>
                                     </li>
                                 ))
                             }
