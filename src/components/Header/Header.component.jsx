@@ -9,7 +9,7 @@ const HeaderComponent = ({ switchTheme, theme }) => {
         mainMenuLinks: localStorage.mainMenuLinks ? JSON.parse(localStorage.mainMenuLinks) : null,
         error: null
     })
-    
+
     useEffect(() => {
         if (datas.mainMenuLinks === null || !localStorage.mainMenuLinks || JSON.parse(localStorage.mainMenuLinks).expiration < new Date().getTime()) {
             localStorage.removeItem('mainMenuLinks')
@@ -38,10 +38,12 @@ const HeaderComponent = ({ switchTheme, theme }) => {
         const header = document.querySelector('header')
 
         if (btn_burger.classList.contains('active')) {
+            document.body.style.overflowY = "auto"
             line1.style.animation = "0.6s ease 0s forwards line1_reverse"
             line2.style.animation = "0.6s ease 0s forwards line2_reverse"
             overlay.style.animation = "2s ease 0s forwards close_overlay"
         } else {
+            document.body.style.overflowY = "hidden"
             line1.style.animation = "0.6s ease 0s forwards line1"
             line2.style.animation = "0.6s ease 0s forwards line2"
             overlay.style.display = 'flex'
@@ -86,20 +88,24 @@ const HeaderComponent = ({ switchTheme, theme }) => {
                 </div>
             </header>
             <nav className='overlay'>
-                <ul>
-                    {
-                        datas.mainMenuLinks !== null &&
-                        <>
+                <div>
+                    <div>
+                        <ul>
                             {
-                                datas.mainMenuLinks.data.map(page => (
-                                    <li key={page.id}>
-                                        <a href={`${process.env.PUBLIC_URL}${page.page_absolute_path}`}>{page.page_display_title}</a>
-                                    </li>
-                                ))
+                                datas.mainMenuLinks !== null &&
+                                <>
+                                    {
+                                        datas.mainMenuLinks.data.map(page => (
+                                            <li key={page.id}>
+                                                <a href={`${process.env.PUBLIC_URL}${page.page_absolute_path}`}>{page.page_display_title}</a>
+                                            </li>
+                                        ))
+                                    }
+                                </>
                             }
-                        </>
-                    }
-                </ul>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </>
     );
