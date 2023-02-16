@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import Header from './components/Header/Header.component';
 import HomePage from './pages/Home.page';
-import ReactDOM from 'react-dom';
+import * as ReactDOMClient from 'react-dom/client';
 
 const App = () => {
   const [cookieTheme, setCookieTheme] = useCookies(['theme']);
-  const [theme, setTheme] = useState(cookieTheme.value || 'dark');
+  const [theme, setTheme] = useState(cookieTheme.theme || 'dark');
 
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -35,7 +35,7 @@ const App = () => {
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(<App />);
 
 export default App;

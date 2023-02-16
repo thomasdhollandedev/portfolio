@@ -5,7 +5,8 @@
             "itemsByCollectionAndId": "/items/:collection/:id",
             "itemsByCollectionWithFieldsAndFilters": "/items/:collection?fields=:fields&:filters",
             "itemsByCollectionWhereIdIn": "/items/:collection?filter[id][_in]=:filterValues",
-            "itemsByRelatedCollection": "/items/:relatedCollection?fields=:fields&filter[:filterCollection][_in]=:filterValues&sort=:sort"
+            "itemsByRelatedCollectionWith_in": "/items/:relatedCollection?fields=:fields&filter[:filterCollection][_in]=:filterValues&sort=:sort",
+            "itemsByRelatedCollectionWithout_in": "/items/:relatedCollection?fields=:fields&filter[:filterCollection]=:filterValues&sort=:sort"
         }
     }
 }

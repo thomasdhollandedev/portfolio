@@ -13,7 +13,6 @@ const HeaderComponent = ({ switchTheme, theme }) => {
     useEffect(() => {
         if (datas.mainMenuLinks === null || !localStorage.mainMenuLinks || JSON.parse(localStorage.mainMenuLinks).expiration < new Date().getTime()) {
             localStorage.removeItem('mainMenuLinks')
-            console.log('expiré');
             ApiRequests.getMainMenuLinks()
                 .then(response => {
                     setDatas(datas => ({
@@ -29,6 +28,7 @@ const HeaderComponent = ({ switchTheme, theme }) => {
                 })
         }
     }, [datas.mainMenuLinks]);
+
 
     const toggleMenu = async () => {
         const btn_burger = document.querySelector('.btn_burger')
@@ -95,6 +95,7 @@ const HeaderComponent = ({ switchTheme, theme }) => {
                                 datas.mainMenuLinks !== null &&
                                 <>
                                     {
+                                        datas.mainMenuLinks.data.length &&
                                         datas.mainMenuLinks.data.map(page => (
                                             <li key={page.id}>
                                                 <a href={`${process.env.PUBLIC_URL}${page.page_absolute_path}`}>{page.page_display_title}</a>
