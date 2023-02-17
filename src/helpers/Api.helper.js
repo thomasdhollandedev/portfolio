@@ -15,7 +15,11 @@ const ApiHelper = {
                 }
             })
             const datas = await response.json()
-            return datas
+    
+            return {
+                data: datas.data,
+                error: null
+            }
         } catch (error) {
             console.error(error)
             return {

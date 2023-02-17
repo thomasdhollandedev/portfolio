@@ -21,6 +21,7 @@
 .skills_main_container {
     width: 100%;
     display: flex;
+    align-items: center;
     gap: 1rem;
     padding: 2rem;
 }
@@ -46,7 +47,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
 }
 
 @media (max-width: 1280px) {
@@ -57,7 +57,7 @@
 
 .skills_illustration img {
     max-height: 100%;
-    max-width: 100%;
+    max-width: 80%;
     border-radius: 100px;
     -webkit-box-shadow: 0px 0px 20px 10px var(--shadow-color);
     -moz-box-shadow: 0px 0px 20px 10px var(--shadow-color);
@@ -116,20 +116,13 @@
 }
 
 .skill_icon svg {
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     position: relative;
     border-radius: 999px;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     transition: all .5s ease;
-}
-
-@media (max-width: 1280px) {
-    .skill_icon svg {
-        width: 4rem;
-        height: 4rem;
-    }
 }
 
 .skill_icon_container:hover .skill_icon svg {

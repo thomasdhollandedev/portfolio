@@ -7,9 +7,16 @@ const ApiFactory = {
                 newDatas.push(obj.pages_id)
             }
 
-            return newDatas
+            return {
+                data: newDatas,
+                error: null
+            }
         } catch(e) {
             console.error(e)
+            return {
+                data: null,
+                error: "Erreur lors de la récupération des données"
+            }
         }
     }
 }
